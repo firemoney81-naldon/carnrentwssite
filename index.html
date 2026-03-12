@@ -1,23 +1,603 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "장기 리스 및 렌트 비교 서비스",
+      "serviceType": "자동차 금융 및 리스 컨설팅",
+      "provider": {
+        "@type": "Organization",
+        "name": "CarWise 컨설팅",
+        "url": "https://yourdomain.com",
+        "sameAs": [
+          "https://www.facebook.com/yourcarpage",
+          "https://www.instagram.com/yourcarpage"
+        ]
+      },
+      "areaServed": "대한민국",
+      "description": "2026년 최신 데이터를 기반으로 신차 리스차량 및 장기렌트 상품을 비교하고 고객 맞춤형 견적을 제공하는 전문 컨설팅 서비스입니다. 합리적인 가격으로 신차를 이용하고 싶은 고객님께 최적의 솔루션을 제안합니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "자동차 리스/렌트 상품 목록",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "운용리스"
+            },
+            "description": "차량 운용에 필요한 비용을 월 납입금으로 분할 납부하며 세금 절감 효과를 극대화할 수 있는 리스 상품입니다. 주로 개인사업자 및 법인에게 추천됩니다."
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "금융리스"
+            },
+            "description": "차량 구매와 유사하게 만기 시 인수 목적으로 이용하는 상품입니다. 초기 비용 부담을 줄이면서도 차량 번호판은 일반 자가용과 동일하게 이용할 수 있습니다."
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "장기렌트"
+            },
+            "description": "보험, 세금, 정비까지 모두 렌터카 업체에서 전담하는 상품입니다. 초기 비용 부담이 없고 보험료 할증 걱정이 없어 운전 경력이 짧거나 사고 이력이 있는 분께 유리합니다."
+          }
+        ]
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+      background-color: #f5f7fa; /* 부드러운 배경색 */
+      color: #333;
+    }
+    header {
+      background-color: #2c3e50; /* 진한 파란색 계열 */
+      color: white;
+      padding: 2.5rem 1.5rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+      letter-spacing: -1px;
+    }
+    header p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #cfd8dc;
+    }
+    nav {
+      background-color: #34495e;
+      border-radius: 8px;
+      margin: 1.5rem auto 0;
+      max-width: 800px;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: space-around;
+      gap: 1rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.8rem 1rem;
+      display: block;
+      transition: background-color 0.3s ease;
+      position: relative;
+    }
+    nav a:hover, nav a:focus {
+      background-color: #4a627a;
+      border-radius: 8px;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      background-color: white;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+    }
+    section {
+      padding: 2rem 0;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h1, h2, h3, h4 {
+      color: #2c3e50;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 2.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #f0f0f0;
+    }
+    h3 {
+      font-size: 1.6rem;
+      border-left: 4px solid #3498db;
+      padding-left: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+      background-color: #fafafa;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 1.2rem;
+      border: 1px solid #e0e0e0;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    th {
+      background-color: #ecf0f1;
+      color: #34495e;
+      font-weight: 700;
+      text-align: center;
+    }
+    tr:nth-child(even) {
+      background-color: #fcfcfc;
+    }
+    strong {
+      color: #c0392b; /* 강조색 */
+      font-weight: 700;
+    }
+
+    /* FAQ Accordion */
+    dl dt {
+      font-weight: 700;
+      margin-top: 1.5rem;
+      padding: 1rem 1.2rem;
+      cursor: pointer;
+      color: #34495e;
+      background-color: #ecf0f1;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+    dl dt:hover {
+      background-color: #d1d8df;
+    }
+    dl dd {
+      margin-left: 0;
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      line-height: 1.8;
+      display: none;
+      border-left: 3px solid #3498db;
+      transition: height 0.3s ease;
+    }
+    dl dt.active + dd {
+      display: block;
+    }
+
+    /* CTA Button */
+    .cta-button {
+      display: inline-block;
+      width: fit-content;
+      margin: 2.5rem auto;
+      background-color: #e74c3c; /* 주황색 계열 CTA 색상 */
+      color: white;
+      font-weight: 700;
+      padding: 1.5rem 3rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-align: center;
+      box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
+      font-size: 1.2rem;
+    }
+    .cta-button:hover {
+      background-color: #c0392b;
+      transform: translateY(-3px);
+    }
+
+    /* Keyword Tags */
+    .keyword-tags {
+      margin: 1.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 1rem 0;
+      border-top: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .keyword-tags a {
+      background-color: #f0f8ff;
+      color: #3498db;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .keyword-tags a:hover {
+      background-color: #cceeff;
+      color: #2c3e50;
+    }
+
+    /* Input Forms (for engagement time) */
+    .inquiry-form {
+      background-color: #f9f9f9;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    .inquiry-form input[type="text"], .inquiry-form input[type="email"], .inquiry-form select {
+      width: calc(100% - 20px);
+      padding: 12px;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .inquiry-form button {
+      background-color: #3498db;
+      color: white;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    .inquiry-form button:hover {
+      background-color: #2980b9;
+    }
+    .form-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .form-group > div {
+      flex: 1;
+      min-width: calc(50% - 1rem);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.9rem;
+      color: #777;
+      background-color: #ecf0f1;
+      margin-top: 3rem;
+    }
+    .external-links {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .external-links a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+    .external-links a:hover {
+      color: #2980b9;
+      text-decoration: underline;
+    }
+    .graph-container {
+      margin: 2rem 0;
+      text-align: center;
+      padding: 1rem;
+      background-color: #f7f9fb;
+      border-radius: 8px;
+      border: 1px solid #eee;
+    }
+    .graph-container img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      main {
+        padding: 0 1rem;
+        margin: 2rem auto;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      nav ul {
+        flex-direction: column;
+      }
+      .form-group > div {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>현명한 리스차량 선택을 위한 완벽 가이드</h1>
+    <p>2026년 최신 리스/장기렌트 비교 분석, 투명한 견적을 만나보세요.</p>
+    <nav aria-label="메인 메뉴">
+      <ul>
+        <li><a href="#intro">서비스 소개</a></li>
+        <li><a href="#comparison">리스/렌트 차이점</a></li>
+        <li><a href="#cost-analysis">차종별 비용 분석</a></li>
+        <li><a href="#faq">자주 묻는 질문</a></li>
+        <li><a href="#contact">견적 문의</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h2>리스차량, 장기렌트? 2026년 신차 구매 트렌드 완벽 해부</h2>
+      <p>최근 신차 구매 방식이 다양해지면서 많은 분들이 '리스차량'과 '장기렌트' 사이에서 고민합니다. 특히 2026년 자동차 시장은 금리 변동과 차량 모델 변화로 인해 더욱 복잡해지고 있습니다. 이 가이드는 고객님의 상황에 맞는 최적의 차량 구매 방식을 선택할 수 있도록, 리스차량의 **장점과 단점**을 명확하게 비교하고, 투명한 **예상 견적**을 제시하여 합리적인 결정을 돕는 것을 목표로 합니다. 신차를 이용하고 싶지만 **초기 비용** 부담이나 **보험료 할증**이 걱정되는 분, **세금 절감 효과**를 극대화하고 싶은 사업자 분들에게 현명한 **가이드**를 제공합니다.</p>
+
+      <h3>왜 리스차량을 선택하는가?</h3>
+      <p>리스차량은 차량을 직접 구매하지 않고 일정 기간 동안 대여하여 사용하는 방식입니다. 소유에 따른 부담(재산세, 건강보험료 인상) 없이 신차를 이용할 수 있다는 **장점**이 있습니다. 특히 개인사업자나 법인의 경우, 월 리스료 전액을 손비 처리하여 **세금 감면 효과**를 볼 수 있어 경제적으로 유리합니다. 또한 차량 관리나 사고 처리가 비교적 간편해지며, 2~5년 주기로 신차로 교체할 수 있어 최신 기술과 디자인을 경험하기 쉽습니다. 하지만 **단점**도 존재합니다. 계약 기간 중 해지 시 **위약금**이 발생하며, 주행 거리에 제한이 있어 주행량이 많은 운전자에게는 불리할 수 있습니다.</p>
+
+      <div class="keyword-tags" aria-label="연관 키워드">
+        <a href="#comparison">장기렌트와 리스 차이점</a>
+        <a href="#cost-analysis">리스차량 가격 비교</a>
+        <a href="#comparison">운용리스 금융리스 장단점</a>
+        <a href="#cost-analysis">제네시스 리스 견적</a>
+        <a href="#cost-analysis">수입차 리스 비용</a>
+        <a href="#faq">리스 만기 시 처리 방법</a>
+        <a href="#cost-analysis">저렴한 리스 싼곳 추천</a>
+      </div>
+    </section>
+
+    <section id="comparison">
+      <h2>리스 vs. 렌트: 핵심 차이점 완벽 비교</h2>
+      <p>리스차량(운용리스/금융리스)과 장기렌트는 둘 다 '대여' 개념이지만, 상품의 본질과 세금, 보험 처리 방식에서 명확한 **차이점**이 있습니다. 어떤 상품이 고객님께 더 **저렴한**지, **장점과 단점**이 무엇인지 파악하는 것이 중요합니다.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>장기렌트</th>
+            <th>운용리스</th>
+            <th>금융리스</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>차량 번호판</strong></td>
+            <td>'하, 허, 호' (렌터카 번호판)</td>
+            <td>일반 자가용 번호판 (하, 허, 호 아님)</td>
+            <td>일반 자가용 번호판 (하, 허, 호 아님)</td>
+          </tr>
+          <tr>
+            <td><strong>보험 처리</strong></td>
+            <td>렌터카 업체 보험 가입. 보험 경력 단절. 보험료 할증 없음.</td>
+            <td>고객 직접 가입. 개인 보험 경력 유지. 보험료 할증 가능.</td>
+            <td>고객 직접 가입. 개인 보험 경력 유지. 보험료 할증 가능.</td>
+          </tr>
+          <tr>
+            <td><strong>세금 처리</strong></td>
+            <td>월 렌트료 전액 손비 처리 가능. (부가세 환급 가능)</td>
+            <td>월 리스료 중 이자 비용만 손비 처리 가능. (부가세 환급 불가)</td>
+            <td>차량 감가상각비, 이자 비용만 손비 처리 가능. (취득세 납부 필요)</td>
+          </tr>
+          <tr>
+            <td><strong>만기 후 선택</strong></td>
+            <td>인수, 반납, 재렌트</td>
+            <td>인수, 반납, 재리스</td>
+            <td>인수 의무 (차량 소유권 이전)</td>
+          </tr>
+          <tr>
+            <td><strong>추천 대상</strong></td>
+            <td>주행 거리가 길고, 보험료 할증이 높으며, 초기 비용을 아끼고 싶은 운전자.</td>
+            <td>일반 번호판을 선호하며, 세금 절감 효과를 원하는 개인사업자/법인.</td>
+            <td>인수를 염두에 두고 초기 비용을 낮추고 싶은 개인/법인.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>운용리스, 금융리스, 장기렌트의 상세 비교</h3>
+      <p>장기렌트는 **초기 비용**이 거의 들지 않는다는 **장점**이 있어 사회 초년생이나 **신규 가입**자에게 유리합니다. 또한 차량 관리와 정비까지 모두 렌터카 업체가 담당하므로 운전에만 집중할 수 있습니다. 반면 **운용리스**는 일반 번호판을 사용하여 차량 소유의 만족감을 유지하면서도 **세금 절감 효과**를 누릴 수 있습니다. 특히 <strong>개인사업자</strong>나 <strong>법인</strong>의 경우 운용리스를 통해 연간 최대 1,500만원(승용차 기준)까지 비용처리를 할 수 있어 절세 효과가 큽니다. **금융리스**는 사실상 할부 구매와 유사하여 만기 시 인수를 전제로 합니다. 초기 비용으로 취득세를 내야 한다는 점과 부채로 인식된다는 **단점**이 있습니다.</p>
+      <p>결론적으로, **리스차량**을 선택하는 것이 무조건 **저렴한** 것은 아닙니다. 운전자의 주행거리, 보험 경력, 그리고 사업자 여부에 따라 **장단점**이 극명하게 갈립니다. 여러 업체의 **견적 비교**를 통해 자신에게 맞는 **최적의 조건**을 찾는 것이 중요합니다.</p>
+    </section>
+
+    <section id="cost-analysis">
+      <h2>차종별 리스차량 예상 가격 및 견적 분석 (2026년 기준)</h2>
+      <p>리스차량의 **월 납입금**은 **차량 가격**, **계약 기간** (보통 36개월~60개월), **선납금/보증금** 유무, **잔존가치**, 그리고 **리스 이자율**에 따라 크게 달라집니다. 특히 2026년에는 기준 금리 변화와 차량 제조사별 **할인 프로모션**에 따라 견적이 유동적입니다. 저희는 주요 인기 차종을 바탕으로 **평균** **리스료**를 분석하여 **예상 금액**을 제시해 드립니다. 아래 표와 예시는 **저렴한곳**을 찾기 위한 **가격 비교**의 참고 자료로 활용될 수 있습니다.</p>
+
+      <h3>국산차 인기 차종별 리스 가격 분석</h3>
+      <p>국산차 리스차량 시장에서는 **Genesis** (제네시스), **Hyundai** (현대), **Kia** (기아)의 인기가 독보적입니다. 특히 **Genesis G80**과 **Genesis GV80**은 럭셔리 세단 및 SUV 시장에서 리스차량으로 가장 선호됩니다. 중형 세단 중에서는 **Hyundai Grandeur** (그랜저)와 **Kia K8**이 꾸준한 수요를 보이며, SUV 시장에서는 **Hyundai Santa Fe** (싼타페), **Kia Sorento** (쏘렌토), **Kia Carnival** (카니발)이 가족용 차량으로 인기가 높습니다. 최근 **Kia EV6**나 **Hyundai Ioniq 5**와 같은 전기차 리스도 **지원금** 혜택으로 인해 증가하고 있습니다.</p>
+
+      <div class="graph-container">
+        <img src="https://via.placeholder.com/600x300?text=2026%EB%85%84+%EC%9D%B8%EA%B8%B0+%EA%B5%AD%EC%82%B0%EC%B0%A8+%EB%A6%AC%EC%8A%A4%EC%B0%A8%EB%9F%89+%EC%84%A0%ED%98%B8%EB%8F%84+%EB%B9%84%EA%B5%90+%EA%B7%B8%EB%9E%98%ED%94%84" alt="2026년 인기 국산차 리스차량 선호도 비교 그래프">
+        <p><em>[2026년 국산차 리스차량 인기 모델 월 납입금 (36개월 계약 기준) 그래프]</em></p>
+      </div>
+
+      <h4>주요 국산차 모델별 리스 견적 예시 (2026년)</h4>
+      <ul>
+        <li><strong>Genesis G80 (풀체인지 모델):</strong> 월 **70만원대**부터 시작. 고급 옵션 추가 시 월 **90만원대**까지 상승. 법인 리스 **추천** 모델.</li>
+        <li><strong>Hyundai Grandeur:</strong> 월 **40만원대**부터 **예상** 가능. **신규 가입** 시 **할인** 혜택이 많은 모델.</li>
+        <li><strong>Kia Sorento (디젤/하이브리드):</strong> 월 **50만원대**부터 **평균** 견적 형성. 가족 단위 고객에게 **장단점**이 뚜렷한 가성비 SUV.</li>
+        <li><strong>Kia Carnival:</strong> 월 **60만원대**부터. **내돈내산 후기**를 보면 넓은 공간 활용도가 **장점**으로 꼽힘.</li>
+      </ul>
+
+      <h3>수입차 인기 차종별 리스 가격 분석</h3>
+      <p>수입차 시장에서는 **BMW**, **Mercedes-Benz** (벤츠), **Audi** (아우디) 등 독일 3사의 경쟁이 치열하며, **리스차량** 상품이 활발하게 판매됩니다. 특히 **BMW 5 Series**, **Mercedes-Benz E-Class**, **Audi A6**와 같은 E세그먼트 세단이 대표적입니다. 리스차량은 수입차의 높은 **초기 비용** 부담을 줄여주기 때문에 선호도가 높습니다. **Volkswagen Tiguan**이나 **Mercedes-Benz GLB**와 같은 수입 SUV도 합리적인 가격으로 **가입**이 가능합니다.</p>
+
+      <h4>주요 수입차 모델별 리스 견적 예시 (2026년)</h4>
+      <ul>
+        <li><strong>Mercedes-Benz E-Class:</strong> 월 **100만원대**부터 시작. <strong>리스</strong>를 통해 **초기 비용** 절약 가능.</li>
+        <li><strong>BMW 5 Series:</strong> 월 **90만원대**부터. 경쟁 모델인 벤츠 E-Class와 **가격 비교**가 필수.</li>
+        <li><strong>Audi A6:</strong> 월 **80만원대**부터. <strong>할인율</strong>이 높아 **저렴한곳**을 찾으면 유리한 견적을 받을 수 있음.</li>
+        <li><strong>Tesla Model Y (테슬라 모델 Y):</strong> 월 **80만원대**부터 시작. 전기차 리스 **지원금**을 확인해야 함.</li>
+      </ul>
+
+      <h3>리스차량 견적 비교 핵심 키워드</h3>
+      <p><strong>리스차량 가격</strong>을 결정하는 요소는 단순히 차량가뿐 아니라, <strong>잔존가치</strong>와 <strong>금리</strong>입니다. <strong>잔존가치</strong>는 계약 만기 후 차량의 예상 가치를 의미하며, 잔존가치가 높을수록 월 납입금은 낮아집니다. **장기렌트**의 경우 초기 비용이 낮다는 **장점**이 있지만, 총 **비용**은 리스보다 높을 수 있습니다. 또한 **사은품**이나 **현금지원**, **상품권** 등의 **혜택**을 제공하는 **전문 업체**를 통해 **비교** 견적을 받는 것이 중요합니다. 특히 **신규 가입** 시 **할인**을 적용하거나 **만기 인수** 시 유리한 조건을 제시하는지 꼼꼼하게 따져보아야 합니다. **2026년**에는 금리 변동에 따라 견적의 **예상 금액**이 시시각각 변하므로, 실시간 **비교**가 필요합니다.</p>
+      <div class="cta-button-container" style="text-align: center;">
+        <a href="#contact" class="cta-button">1분 만에 내 차종 리스 견적 확인하기</a>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <dl>
+        <dt tabindex="0" aria-expanded="false">Q1. 리스차량과 장기렌트 중 어떤 것이 저렴한가요?</dt>
+        <dd><strong>A1.</strong> 단순 **비용**만 놓고 보면 **장기렌트**가 월 납입금 자체가 **저렴한** 경우가 많습니다. 특히 <strong>신차 가입</strong> 시 **할인**이나 **초기 비용**이 거의 없다는 **장점**이 있습니다. 하지만 **리스차량**은 **세금 절감 효과**를 통해 총 **비용**을 절약할 수 있습니다. 예를 들어, 개인사업자가 <strong>제네시스 GV80</strong>을 리스로 이용할 경우, 연간 **1,500만원** 한도 내에서 **비용처리**가 가능하여 실질적인 **비용**은 더 낮을 수 있습니다. 고객님의 **운전 경력**과 **사업자 여부**, **주행량**을 고려하여 **전문 업체**와 **상담** 후 결정하는 것이 좋습니다. 여러 업체의 **견적 비교**를 통해 자신에게 유리한 상품을 찾는 것이 핵심입니다.</dd>
+        
+        <dt tabindex="0" aria-expanded="false">Q2. 리스차량의 초기 비용은 얼마인가요?</dt>
+        <dd><strong>A2.</strong> 리스차량의 **초기 비용**은 고객님의 **신용 등급**과 선택하는 상품에 따라 달라집니다. **보증금**이나 **선납금**을 설정할 수 있습니다. **보증금**은 계약 만기 후 돌려받는 금액이며, **선납금**은 월 납입금을 미리 납부하여 월 납입금을 낮추는 방식입니다. **초기 비용** 없이 리스차량을 이용하고 싶다면 '무보증 리스'를 이용할 수 있습니다. **장점**은 초기 부담이 없다는 것이지만, **단점**은 월 납입금이 상대적으로 높아질 수 있다는 것입니다. **2026년**에는 **신규 가입** 시 **할인** 이벤트를 진행하는 **업체**가 많으니, 이를 활용하면 **초기 비용** 부담을 줄일 수 있습니다. <strong>견적</strong>을 받을 때 **초기 비용** 옵션을 다양하게 비교해 보세요.</dd>
+        
+        <dt tabindex="0" aria-expanded="false">Q3. 리스차량 계약 만기 시 선택 사항과 주의할 점은 무엇인가요?</dt>
+        <dd><strong>A3.</strong> **리스차량** 계약 만기 시에는 크게 세 가지 선택지가 있습니다: **인수**, **반납**, **재리스**입니다. **인수**는 잔존가치를 지불하고 차량을 소유하는 방식입니다. 차량 가격 대비 **장점**이 크다고 판단될 때 선택합니다. **반납**은 차량을 업체에 돌려주는 방식입니다. 차량 상태에 따라 **패널티**가 발생할 수 있으므로, **내돈내산 후기**나 **전문 업체**의 조언을 참고하여 차량 관리를 잘해야 합니다. **재리스**는 계약을 연장하여 계속 이용하는 방식입니다. **주의할 점**은 만기 시 차량의 **감가상각**이 예상보다 커서 잔존가치가 높게 책정되어 있다면 **반납**하는 것이 유리할 수 있습니다.</dd>
+        
+        <dt tabindex="0" aria-expanded="false">Q4. 리스차량 업체 순위 및 비교 기준은 무엇인가요?</dt>
+        <dd><strong>A4.</strong> **리스차량 순위**를 매기는 것은 어렵지만, **신뢰할 수 있는 업체**를 고르는 기준은 명확합니다. 첫째, **다양한 차종**의 **가격 비교**가 가능한 곳인지 확인해야 합니다. 둘째, **투명한 견적**을 제시하며 **추가 비용**이 없는지 확인해야 합니다. 셋째, **전문 컨설턴트**가 고객의 상황에 맞는 **장단점**을 명확히 설명해 주는지 확인하세요. **내돈내산 후기**를 통해 **전문 업체**의 평판을 확인하고, **가입** 시 **할인**이나 **사은품** 등의 **혜택**이 있는지 비교해 보는 것이 좋습니다. **2026년** 기준, <strong>네이버</strong>, <strong>구글</strong> 등에서 검색하여 **순위**가 높은 **업체**들을 꼼꼼하게 **비교**해 보는 것이 중요합니다.</dd>
+
+        <dt tabindex="0" aria-expanded="false">Q5. 리스차량은 보험료 할증이 있나요?</dt>
+        <dd><strong>A5.</strong> **운용리스**와 **금융리스**는 고객이 직접 보험에 가입하므로 개인 보험 경력이 유지됩니다. 따라서 사고 발생 시 **보험료 할증**이 발생합니다. 반면 **장기렌트**는 렌터카 업체 명의로 보험이 가입되어 있어 개인 보험 경력이 단절되지만, 사고가 발생해도 개인 보험료 **할증**이 없습니다. **장기렌트**는 운전 경력이 짧거나 사고 이력이 많은 분들께 **장점**이 있습니다. **리스차량**을 선택할 경우, 보험료 **견적**까지 포함하여 전체 **예상 금액**을 **비교**해야 합니다.</dd>
+      </dl>
+    </section>
+    
+    <section id="external-info">
+      <h2>공신력 있는 외부 정보 및 참고 자료 (2026년 기준)</h2>
+      <p>리스차량 및 장기렌트 계약 시 소비자 보호를 위해 공정거래위원회 및 한국소비자원의 정보를 참고하는 것이 좋습니다. 사전에 충분한 **가격 비교**와 약관 검토를 통해 불필요한 피해를 예방할 수 있습니다.</p>
+      <div class="external-links">
+        <a href="https://www.ftc.go.kr/www/CONTENTS_VIEW.html?CONTENTS_NO=10" target="_blank">공정거래위원회 - 자동차 대여 표준약관</a>
+        <a href="https://www.kca.go.kr/home/sub.do?menu_seq=29" target="_blank">한국소비자원 - 자동차 리스/렌트 소비자 피해주의보</a>
+        <a href="https://namu.wiki/w/%EC%9E%A5%EA%B8%B0%EB%A0%8C%ED%8A%B8" target="_blank">나무위키 - 장기렌트 관련 정보</a>
+        <a href="https://www.gov.kr/main?a=A000000010&b=B000000002&c=2" target="_blank">정부24 - 자동차 등록 관련 규정</a>
+        <a href="https://www.fss.or.kr/main/index.jsp" target="_blank">금융감독원 - 금융소비자 정보포털 (파인)</a>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>맞춤형 리스/렌트 견적 상담 신청</h2>
+      <p>2026년 최신 **할인** 및 **프로모션** 정보를 반영하여 고객님에게 가장 **저렴한** **리스차량** 또는 **장기렌트** **견적**을 제안해 드립니다. 아래 정보를 입력하시면 **전문 업체**의 **상담사**가 **신규 가입** <strong>혜택</strong>과 함께 **비교** 견적을 안내해 드립니다. **초기 비용** 없는 무보증 상품, **사은품** 증정 **이벤트** 등 다양한 혜택을 놓치지 마세요.</p>
+
+      <div class="inquiry-form">
+        <form action="#" method="post">
+          <div class="form-group">
+            <div>
+              <label for="name">이름:</label>
+              <input type="text" id="name" name="name" placeholder="이름을 입력해 주세요" required>
+            </div>
+            <div>
+              <label for="phone">연락처:</label>
+              <input type="text" id="phone" name="phone" placeholder="전화번호를 입력해 주세요" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <div>
+              <label for="car-model">희망 차종:</label>
+              <select id="car-model" name="car-model" required>
+                <option value="">차종을 선택해 주세요</option>
+                <option value="genesis-g80">Genesis G80</option>
+                <option value="genesis-gv80">Genesis GV80</option>
+                <option value="genesis-g70">Genesis G70</option>
+                <option value="hyundai-grandeur">Hyundai Grandeur</option>
+                <option value="hyundai-santafe">Hyundai Santa Fe</option>
+                <option value="hyundai-palisade">Hyundai Palisade</option>
+                <option value="hyundai-ioniq5">Hyundai Ioniq 5</option>
+                <option value="kia-k5">Kia K5</option>
+                <option value="kia-k8">Kia K8</option>
+                <option value="kia-sorento">Kia Sorento</option>
+                <option value="kia-carnival">Kia Carnival</option>
+                <option value="bmw-5series">BMW 5 Series</option>
+                <option value="bmw-3series">BMW 3 Series</option>
+                <option value="mercedes-eclass">Mercedes-Benz E-Class</option>
+                <option value="mercedes-cclass">Mercedes-Benz C-Class</option>
+                <option value="audi-a6">Audi A6</option>
+                <option value="audi-a4">Audi A4</option>
+                <option value="tesla-model3">Tesla Model 3</option>
+                <option value="tesla-modelY">Tesla Model Y</option>
+                <option value="volkswagen-tiguan">Volkswagen Tiguan</option>
+                <option value="porsche-cayenne">Porsche Cayenne</option>
+                <option value="porsche-panamera">Porsche Panamera</option>
+                <option value="ford-explorer">Ford Explorer</option>
+                <option value="chevrolet-traverse">Chevrolet Traverse</option>
+                <option value="renault-xm3">Renault XM3</option>
+                <option value="kgmobility-torres">KG Mobility Torres</option>
+                <option value="기타">기타 차종</option>
+              </select>
+            </div>
+            <div>
+              <label for="contract-type">희망 계약 유형:</label>
+              <select id="contract-type" name="contract-type" required>
+                <option value="">선택해 주세요</option>
+                <option value="운용리스">운용리스</option>
+                <option value="금융리스">금융리스</option>
+                <option value="장기렌트">장기렌트</option>
+                <option value="미정">미정 (전문가 추천 요청)</option>
+              </select>
+            </div>
+          </div>
+          <label for="message">추가 문의사항:</label>
+          <textarea id="message" name="message" rows="4" placeholder="궁금한 점이나 특별히 원하는 조건 (ex. 무보증, 만기 인수 등)을 적어주세요."></textarea>
+          <button type="submit">무료 견적 상담 신청하기</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.querySelectorAll('dl dt').forEach((dt) => {
+      dt.addEventListener('click', () => {
+        const dd = dt.nextElementSibling;
+        const expanded = dt.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('dl dt').forEach(otherDt => {
+          otherDt.classList.remove('active');
+          otherDt.setAttribute('aria-expanded', 'false');
+          otherDt.nextElementSibling.style.display = 'none';
+        });
+        if (!expanded) {
+          dt.classList.add('active');
+          dt.setAttribute('aria-expanded', 'true');
+          dd.style.display = 'block';
+        } else {
+          dt.classList.remove('active');
+          dt.setAttribute('aria-expanded', 'false');
+          dd.style.display = 'none';
+        }
+      });
+      dt.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dt.click();
+        }
+      });
+    });
+  </script>
+  
